@@ -2,13 +2,10 @@ from flask import Flask, request, jsonify
 import json
 from flask_cors import CORS
 from dotenv import load_dotenv
-import os
-from skincare_recommender import recommend_essentials
-from middleware import verify_token
+from skincare_recommender_model import recommend_essentials
 
 app = Flask(__name__)
 load_dotenv()
-# cors = CORS(app, resources={r"/recommend_products": {"origins": os.getenv("FRONTEND_URL")}}, supports_credentials=True)
 CORS(app, supports_credentials=True)
 
 @app.route("/", methods=['GET'])
@@ -17,7 +14,6 @@ def fun():
 
 
 @app.route('/recommend_products', methods=['POST'])
-# @verify_token
 def recommendations():
     try:
         input = request.json

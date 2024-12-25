@@ -33,7 +33,7 @@ router.post('/register', [
 
         //create JWT token which lasts for 1 week and a cookie in the result storing the token.
         const token = jwt.sign({userID : user._id}, process.env.JWT_SECRET_KEY as string, {expiresIn : "7d"})
-        res.cookie("auth_token", token, {maxAge: 604800000, httpOnly : true, secure : process.env.NODE_ENV === 'production'});
+        res.cookie("auth_token", token, {maxAge: 604800000, httpOnly : true, secure : process.env.NODE_ENV === 'production', sameSite : 'none'});
 
         return res.status(200).send({message : "User registered OK"})
     }

@@ -140,8 +140,6 @@ export const recommend = async (data : AnalyserData) => {
             vector.push(0);
         }
     }
-    // const cookie = Cookies.get("auth_token")
-    // console.log("Cookie : " , cookie);
 
     const response = await fetch(`${FLASK_SERVER_BASE_URL}/recommend_products`, {
         credentials: "include",
@@ -149,11 +147,9 @@ export const recommend = async (data : AnalyserData) => {
         body : JSON.stringify(vector),
         headers : {
             "Content-Type" : "application/json",
-            // "Cookie" :  Cookies.get("auth_token") as string,
         }
     });
 
-    // console.log("Received response from flask server : ", response.json())
 
     if(!response.ok){
         throw new Error("Something went wrong")
