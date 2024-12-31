@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import json
 from flask_cors import CORS
+import os
 from dotenv import load_dotenv
 from skincare_recommender_model import recommend_essentials
 
@@ -12,8 +13,17 @@ CORS(app, supports_credentials=True)
 def fun():
     return jsonify({"message" : "Server up and running!"}), 200
 
+def verify_source(f):
+    def wrapper(*args, **kwargs):
+        if (request.host_url == os.environ.get('NODE_URL')):
+            next()
+        else :
+            return jsonify({'message' : 'Unauthorized'}), 403
+    return wrapper
 
-@app.route('/recommend_products', methods=['POST'])
+
+@app.route('/recommendation_model', methods=['POST'])
+@verify_source
 def recommendations():
     try:
         input = request.json

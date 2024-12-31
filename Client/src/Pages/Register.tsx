@@ -15,7 +15,7 @@ const Register = () => {
             await queryClient.invalidateQueries("validateToken")
             navigate('/');
         },
-        onError : (err : Error) => console.log("Oops... looks like something went wrong! " + err.message)
+        onError : (err : Error) => console.log("Oops... looks like something went wrong! " )
     });
 
     const onSubmit = handleSubmit((form_data) => mutation.mutate(form_data))

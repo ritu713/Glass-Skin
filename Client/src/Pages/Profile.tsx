@@ -20,7 +20,7 @@ const Profile = () => {
       navigate("/")
     },
     onError : (err : Error) => {
-      alert("Error during signout"+ err.message)
+      alert("Error during signout")
     }
   })
 

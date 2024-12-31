@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import authRoutes from './routes/Auth'
 import routineRoutes from './routes/Routine'
+import analysisRoutes from './routes/Analyser'
 import bodyParser from 'body-parser'
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser'
@@ -21,6 +22,7 @@ app.use(cors({
 }));
 app.use('/api/auth', authRoutes)
 app.use('/api/routine', routineRoutes)
+app.use('/api/analyser', analysisRoutes)
 
 mongoose
 .connect(process.env.MONGO_URL as string)

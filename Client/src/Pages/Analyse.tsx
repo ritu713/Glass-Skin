@@ -47,7 +47,7 @@ const Analyse = () => {
         
       },
       onError(error : any) {
-        alert("Something went wrong. We're working on it"+ error.message)
+        alert("Something went wrong.")
       }
     })
     const onSubmit = handleSubmit((form_data) => mutation.mutate(form_data))

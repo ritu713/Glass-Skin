@@ -6,7 +6,6 @@ const FLASK_SERVER_BASE_URL = import.meta.env.VITE_FLASK_SERVER_BASE_URL || ""
 
 //auth related fetches
 export const createNewUser = async (form_data : RegisterFormData) => {
-    console.log("In api call")
     const body = {
         "emailID" : form_data.emailID,
         "password" : form_data.password,
@@ -18,7 +17,6 @@ export const createNewUser = async (form_data : RegisterFormData) => {
             "skinConcerns" : form_data.skinConcerns
         }
     }
-    console.log(form_data.skinConcerns)
     const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method : "POST",
         credentials : "include",
@@ -27,7 +25,7 @@ export const createNewUser = async (form_data : RegisterFormData) => {
         },
         body : JSON.stringify(body)
     });
-    console.log("Got response from " + API_BASE_URL)
+
     const responseBody = await response.json();
     if(!response.ok){
         throw new Error(responseBody);
@@ -141,7 +139,7 @@ export const recommend = async (data : AnalyserData) => {
         }
     }
 
-    const response = await fetch(`${FLASK_SERVER_BASE_URL}/recommend_products`, {
+    const response = await fetch(`${API_BASE_URL}/api/analyser/recommend_products`, {
         credentials: "include",
         method: "POST",
         body : JSON.stringify(vector),
